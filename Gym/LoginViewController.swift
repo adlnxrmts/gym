@@ -31,6 +31,21 @@ class LoginViewController: UIViewController {
         }
         
         //Place for URL request
+        //TODO: Errors
+        guard let login = userLogin, let password = userPassword else { return }
+        APIServer.login(withUserName: login, withPassword: password) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            guard let data = data else { return }
+            do {
+                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary as? [String: String]
+                //Don't forget to change dictionary type
+                print(dictionary ?? "Troubles with serializatoin json in login")
+            } catch {
+                print(error)
+            }
+        }
         
         //Save data
         UserDefaults.standard.set(userLogin, forKey: "userLogin")
