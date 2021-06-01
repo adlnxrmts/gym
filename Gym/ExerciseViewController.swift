@@ -24,6 +24,7 @@ class ExerciseViewController: UIViewController {
             guard let data = data else { return }
             do {
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
+                print(dictionary)
                 self.exercises = dictionary as? [Int : [String : Any]]
             } catch {
                 print(error)

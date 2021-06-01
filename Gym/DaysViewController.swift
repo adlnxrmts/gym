@@ -24,11 +24,13 @@ class DaysViewController: UIViewController {
             guard let data = data else { return }
             do {
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
+                print(dictionary)
                 self.days = dictionary as? [Int : [String : Int]]
             } catch {
                 print(error)
             }
         }
+        days = [0: ["id": 0, "number": 1], 1: ["id": 1, "number": 2]]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

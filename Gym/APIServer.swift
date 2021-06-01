@@ -11,7 +11,7 @@ import Foundation
 class APIServer {
     
     //DON'T FORGET TO PUT WORKING NGROK LINK
-    static let url = "http://bfd6e80f1b86.ngrok.io"
+    static let url = "http://ea103046f53d.ngrok.io"
     
     static func login(withUserName name: String, withPassword password: String, completionHandler: @escaping (Data?, URLResponse?, Error?)-> Void) {
         guard let url = URL(string: url + "/authentication") else { return }
@@ -73,7 +73,7 @@ class APIServer {
         guard let url = URL(string: url + "/all_weeks") else { return }
         var request = URLRequest(url: url)
         
-    let body = ["id": stageID]
+    let body = ["stage_id": stageID]
     guard let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
     
         request.httpMethod = "POST"
@@ -87,7 +87,7 @@ class APIServer {
         guard let url = URL(string: url + "/all_days") else { return }
         var request = URLRequest(url: url)
         
-    let body = ["id": weekID]
+    let body = ["week_id": weekID]
     guard let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
     
         request.httpMethod = "POST"
@@ -101,7 +101,7 @@ class APIServer {
         guard let url = URL(string: url + "/all_exercises") else { return }
         var request = URLRequest(url: url)
         
-    let body = ["id": dayID]
+    let body = ["day_id": dayID]
     guard let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
     
         request.httpMethod = "POST"

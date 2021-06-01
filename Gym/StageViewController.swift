@@ -34,7 +34,7 @@ class StageViewController: UIViewController {
                 guard let data = data else { return }
                 do {
                     let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                    self.stages = (dictionary as! [Int : [String : Any]])
+                    self.stages = dictionary as? NSDictionary as? [Int : [String : Any]]
                 } catch {
                     print(error)
                 }
@@ -48,7 +48,7 @@ class StageViewController: UIViewController {
                 guard let data = data else { return }
                 do {
                     let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                    self.stages = (dictionary as! [Int : [String : Any]])
+                    self.stages = dictionary as? NSDictionary as? [Int : [String : Any]]
                 } catch {
                     print(error)
                 }
@@ -57,6 +57,7 @@ class StageViewController: UIViewController {
         default:
             break
         }
+        stages = [0: ["id": 0, "status": "", "name": "Мой этап"], 1: ["id": 1, "status": "", "name": "Мой новый этап"], 2: ["id": 2, "status": "", "name": "Мой самый новый этап"]]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
