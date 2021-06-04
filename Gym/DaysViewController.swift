@@ -10,8 +10,9 @@ import UIKit
 
 class DaysViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
     var weekID: Int?
-    var days: [Int: [String: Int]]?
+    var days = Days()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +24,20 @@ class DaysViewController: UIViewController {
             }
             guard let data = data else { return }
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                print(dictionary)
-                self.days = dictionary as? [Int : [String : Int]]
+                let daysArray = try JSONDecoder().decode([Int: weeksAndDaysData].self, from: data)
+                self.days.data = daysArray
             } catch {
+                self.days = {
+                    let days = Days()
+                    days.data = [0: weeksAndDaysData.init(id: 0, number: 123), 1: weeksAndDaysData.init(id: 1, number: 321)]
+                    return days
+                }()
                 print(error)
             }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
-        days = [0: ["id": 0, "number": 1], 1: ["id": 1, "number": 2]]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,12 +49,12 @@ class DaysViewController: UIViewController {
 
 extension DaysViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return days?.count ?? 0
+        return days.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "day-cell", for: indexPath)
-        guard let dayNumber = days?[indexPath.row]?["number"], let id = days?[indexPath.row]?["id"] else {
+        guard let dayNumber = days.data?[indexPath.row]?.number, let id = days.data?[indexPath.row]?.id else {
             return UITableViewCell(style: .default, reuseIdentifier: "day-cell")
         }
         cell.textLabel?.text = "День " + String(dayNumber)

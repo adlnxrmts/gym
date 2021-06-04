@@ -375,6 +375,9 @@
                     <navigationItem key="navigationItem" title="Этапы" id="JZM-2C-Vc1">
                         <barButtonItem key="backBarButtonItem" title="Все этапы" id="AwH-G1-jPU"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="RcM-Wx-1V4" id="bNK-qL-Iso"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSe-oE-Blf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -429,6 +432,9 @@
                         <viewLayoutGuide key="safeArea" id="o4s-9S-FrW"/>
                     </view>
                     <navigationItem key="navigationItem" title="Этап N" id="2SW-QF-vrL"/>
+                    <connections>
+                        <outlet property="tableView" destination="Nig-Db-A4C" id="Kkk-t7-ZJo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0h5-v5-vx8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -483,6 +489,9 @@
                         <viewLayoutGuide key="safeArea" id="ORQ-C3-FCB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Неделя N" id="Z9d-wf-aY0"/>
+                    <connections>
+                        <outlet property="tableView" destination="YVH-x6-5rN" id="ft0-96-1ae"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2YV-bN-vt4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

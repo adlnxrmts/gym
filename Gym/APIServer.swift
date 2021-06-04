@@ -11,7 +11,7 @@ import Foundation
 class APIServer {
     
     //DON'T FORGET TO PUT WORKING NGROK LINK
-    static let url = "http://ea103046f53d.ngrok.io"
+    static let url = "http://100be844791f.ngrok.io"
     
     static func login(withUserName name: String, withPassword password: String, completionHandler: @escaping (Data?, URLResponse?, Error?)-> Void) {
         guard let url = URL(string: url + "/authentication") else { return }

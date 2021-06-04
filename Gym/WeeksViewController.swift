@@ -10,8 +10,9 @@ import UIKit
 
 class WeeksViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     var stageID: Int?
-    var weeks: [Int: [String: Int]]?
+    var weeks = Weeks()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +24,21 @@ class WeeksViewController: UIViewController {
             }
             guard let data = data else { return }
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                print(dictionary)
-                self.weeks = dictionary as? [Int : [String : Int]]
+                let weeksArray = try JSONDecoder().decode([Int: weeksAndDaysData].self, from: data)
+                //TODO: Check for answer
+                self.weeks.data = weeksArray
             } catch {
+                self.weeks = {
+                    let weeks = Weeks()
+                    weeks.data = [0: weeksAndDaysData.init(id: 0, number: 123) , 1: weeksAndDaysData.init(id: 1, number: 321)]
+                    return weeks
+                }()
                 print(error)
             }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
-        weeks = [0: ["id": 0, "number": 1], 1: ["id": 1, "number": 2]]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -43,12 +51,12 @@ class WeeksViewController: UIViewController {
 
 extension WeeksViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weeks?.count ?? 0
+        return weeks.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "week-cell", for: indexPath)
-        guard let weekNumber = weeks?[indexPath.row]?["number"], let id = weeks?[indexPath.row]?["id"] else {
+        guard let weekNumber = weeks.data?[indexPath.row]?.number, let id = weeks.data?[indexPath.row]?.id else {
             return UITableViewCell(style: .default, reuseIdentifier: "week-cell")
         }
         cell.textLabel?.text = "Неделя " + String(weekNumber)

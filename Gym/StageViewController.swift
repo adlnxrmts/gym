@@ -10,8 +10,9 @@ import UIKit
 
 class StageViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
     var stageType = StageType.notSpecified
-    var stages: [Int: [String: Any]]?
+    var stages = Stages()
     
     enum StageType {
         case previous
@@ -27,37 +28,40 @@ class StageViewController: UIViewController {
         //Place for a url request
         switch stageType {
         case .upcoming:
-            APIServer.upcomingStages(withUserName: userName) { (data, response, error) in
-                if let response = response {
-                    print(response)
-                }
-                guard let data = data else { return }
-                do {
-                    let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                    self.stages = dictionary as? NSDictionary as? [Int : [String : Any]]
-                } catch {
-                    print(error)
-                }
-            }
+            APIServer.upcomingStages(withUserName: userName, completionHandler: getData(data:response:error:))
             break
         case .previous:
-            APIServer.previousStages(withUserName: userName) { (data, response, error) in
-                if let response = response {
-                    print(response)
-                }
-                guard let data = data else { return }
-                do {
-                    let dictionary = try JSONSerialization.jsonObject(with: data, options: [])
-                    self.stages = dictionary as? NSDictionary as? [Int : [String : Any]]
-                } catch {
-                    print(error)
-                }
-            }
+            APIServer.previousStages(withUserName: userName, completionHandler: getData(data:response:error:))
             break
         default:
             break
         }
-        stages = [0: ["id": 0, "status": "", "name": "Мой этап"], 1: ["id": 1, "status": "", "name": "Мой новый этап"], 2: ["id": 2, "status": "", "name": "Мой самый новый этап"]]
+    }
+    
+    func getData(data: Data?, response: URLResponse?, error: Error?) {
+        if let response = response {
+            print(response)
+        }
+        guard let data = data else { return }
+        do {
+            self.stages = try JSONDecoder().decode(Stages.self, from: data)
+            if  self.stages.answer != "fail" || self.stages.answer != nil {
+                let stagesArray = try JSONDecoder().decode([Int: stageData].self, from: data)
+                self.stages.data = stagesArray
+                print("I haven't been here")
+            }
+            //TODO: Need to check for answer
+        } catch {
+            self.stages = {
+                let stages = Stages()
+                stages.data = [0: stageData.init(id: 0, status: "", name: "Это тестовые данные"), 1: stageData.init(id: 1, status: "", name: "Значит все плохо")]
+                return stages
+            }()
+            print(error)
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,12 +74,12 @@ class StageViewController: UIViewController {
 
 extension StageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stages?.count ?? 0
+        return stages.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stages-cell", for: indexPath)
-        guard let text = stages?[indexPath.row]?["name"] as? String, let id = stages?[indexPath.row]?["id"] as? Int else {
+        guard let text = stages.data?[indexPath.row]?.name, let id = stages.data?[indexPath.row]?.id else {
             return UITableViewCell(style: .default, reuseIdentifier: "stages-cell")
         }
         cell.tag = id
