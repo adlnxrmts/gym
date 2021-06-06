@@ -24,8 +24,14 @@ class DaysViewController: UIViewController {
             }
             guard let data = data else { return }
             do {
-                let daysArray = try JSONDecoder().decode([Int: weeksAndDaysData].self, from: data)
-                self.days.data = daysArray
+                self.days = try JSONDecoder().decode(Days.self, from: data)
+                if self.days.answer != "fail" {
+                    let daysArray = try JSONDecoder().decode([Int: weeksAndDaysData].self, from: data)
+                    self.days.data = daysArray
+                } else if self.days.answer == "fail" {
+                    //Do smth
+                    return
+                }
             } catch {
                 self.days = {
                     let days = Days()
@@ -44,6 +50,27 @@ class DaysViewController: UIViewController {
         guard let cell = sender as? UITableViewCell  else { return }
         let weeksVC = segue.destination as! ExerciseViewController
         weeksVC.dayID = cell.tag
+    }
+    @IBAction func deleteWeekButtonClicked(_ sender: UIButton) {
+        guard let weekID = weekID else { return }
+        APIServer.deleteWeek(withWeekID: weekID) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            guard let data = data else { return }
+            do {
+                let answer = try JSONDecoder().decode(DataFromServer.self, from: data)
+                if answer.answer == "fail" {
+                    //Do smth
+                } else if answer.answer == "success" {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 

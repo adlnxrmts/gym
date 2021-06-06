@@ -57,16 +57,29 @@ class RegistrationViewController: UIViewController {
             }
             guard let data = data else { return }
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary as? [String: String]
-                //Proccess the server response
+                let answer = try JSONDecoder().decode(DataFromServer.self, from: data)
+                if answer.answer == "fail" {
+                    self.showAlert(withTitle: "Сервер временно недоступен", andMessage: "Произошла ошибка на сервере, поробуйте позже.")
+                    return
+                } else if answer.answer == "success" {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Добро пожаловать, \(lastname) \(name)!", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: { (_) in
+                            self.saveAndChangeRootVC(withUserLogin: login, andPassword: password)
+                        }))
+                        self.present(alert, animated: true)
+                    }
+                }
             } catch {
                 print(error)
             }
         }
-        
+    }
+    
+    func saveAndChangeRootVC(withUserLogin login: String, andPassword password: String) {
         //Save data
-        UserDefaults.standard.set(userLogin, forKey: "userLogin")
-        UserDefaults.standard.set(userPassword, forKey: "userPassword")
+        UserDefaults.standard.set(login, forKey: "userLogin")
+        UserDefaults.standard.set(password, forKey: "userPassword")
         UserDefaults.standard.set(true, forKey: "isUserLockedIn")
         
         //Show protected screens
@@ -76,9 +89,11 @@ class RegistrationViewController: UIViewController {
     }
     
     func showAlert(withTitle title: String, andMessage message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-        self.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
     
 }

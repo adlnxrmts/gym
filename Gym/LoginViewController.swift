@@ -42,16 +42,34 @@ class LoginViewController: UIViewController {
             }
             guard let data = data else { return }
             do {
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary as? [String: String]
-                //Proccess the server response
+                let answer = try JSONDecoder().decode(LoginData.self, from: data)
+                if answer.answer == "incorrect login" {
+                    self.showAlert(withTitle: "Такого пользователя не существует", andMessage: "Попробуйте ввести логин заново или зарегестрироваться.")
+                    return
+                } else if answer.answer == "incorrect password" {
+                    self.showAlert(withTitle: "Неверный пароль", andMessage: "")
+                    return
+                } else if answer.answer == "success" {
+                    guard let name = answer.name, let lastname = answer.lastname else {  print("Oh, decodable... Again...")
+                        return }
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Добро пожаловать, \(lastname) \(name)!", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: { (_) in
+                            self.saveAndChangeRootVC(withUserLogin: login, andPassword: password)
+                        }))
+                        self.present(alert, animated: true)
+                    }
+                }
             } catch {
                 print(error)
             }
         }
-        
+    }
+    
+    func saveAndChangeRootVC(withUserLogin login: String, andPassword password: String) {
         //Save data
-        UserDefaults.standard.set(userLogin, forKey: "userLogin")
-        UserDefaults.standard.set(userPassword, forKey: "userPassword")
+        UserDefaults.standard.set(login, forKey: "userLogin")
+        UserDefaults.standard.set(password, forKey: "userPassword")
         UserDefaults.standard.set(true, forKey: "isUserLockedIn")
         
         //Show protected screens
@@ -61,9 +79,11 @@ class LoginViewController: UIViewController {
     }
     
     func showAlert(withTitle title: String, andMessage message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
-        self.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Закрыть", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
 }
 

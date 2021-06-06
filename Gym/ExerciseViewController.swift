@@ -31,6 +31,27 @@ class ExerciseViewController: UIViewController {
             }
         }
     }
+    @IBAction func deleteDayButtonClicked(_ sender: UIButton) {
+        guard let dayID = dayID else { return }
+        APIServer.deleteDay(withDayID: dayID) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            guard let data = data else { return }
+            do {
+                let answer = try JSONDecoder().decode(DataFromServer.self, from: data)
+                if answer.answer == "fail" {
+                    //Do smth
+                } else if answer.answer == "success" {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
 
 extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {

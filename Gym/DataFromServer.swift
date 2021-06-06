@@ -8,20 +8,31 @@
 
 import Foundation
 
-class Stages: DataFromServer {
+class Stages: Codable {
+    var answer: String?
     var data: [Int: stageData]?
 }
 
-class Weeks: DataFromServer {
+class Weeks: Codable {
+    var answer: String?
     var data: [Int : weeksAndDaysData]?
 }
 
-class Days: DataFromServer {
+class Days: Codable {
+    var answer: String?
     var data: [Int: weeksAndDaysData]?
 }
 
-class Exercises: DataFromServer {
+class Exercises: Codable {
+    var answer: String?
     var data: [Int: exerciseData]?
+}
+
+class LoginData: Codable {
+    var answer: String?
+    var name: String?
+    var surname: String?
+    var lastname: String?
 }
 
 struct exerciseData: Codable {
@@ -31,11 +42,13 @@ struct exerciseData: Codable {
 }
 
 struct weeksAndDaysData: Codable {
+    var answer: String?
     var id: Int
     var number: Int
 }
 
 struct stageData: Codable {
+    var answer: String?
     var id: Int
     var status: String
     var name: String?

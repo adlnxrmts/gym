@@ -45,12 +45,13 @@ class StageViewController: UIViewController {
         guard let data = data else { return }
         do {
             self.stages = try JSONDecoder().decode(Stages.self, from: data)
-            if  self.stages.answer != "fail" || self.stages.answer != nil {
+            if self.stages.answer != "fail" {
                 let stagesArray = try JSONDecoder().decode([Int: stageData].self, from: data)
                 self.stages.data = stagesArray
-                print("I haven't been here")
+            } else if self.stages.answer == "fail" {
+                //TODO: Do sOmEtHiNg
+                return
             }
-            //TODO: Need to check for answer
         } catch {
             self.stages = {
                 let stages = Stages()
