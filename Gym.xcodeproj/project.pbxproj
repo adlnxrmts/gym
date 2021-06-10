@@ -15,6 +15,8 @@
 		6F469CA426652FF000A17152 /* DaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F469CA326652FF000A17152 /* DaysViewController.swift */; };
 		6F469CA62665302900A17152 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F469CA52665302900A17152 /* ExerciseViewController.swift */; };
 		6F7E77E6266AAA8B0054F551 /* DataFromServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7E77E5266AAA8B0054F551 /* DataFromServer.swift */; };
+		6FC6A53E2672BC9900E48054 /* DayAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A53D2672BC9900E48054 /* DayAddViewController.swift */; };
+		6FC6A5402672C35600E48054 /* ExerciseAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A53F2672C35600E48054 /* ExerciseAddViewController.swift */; };
 		6FC6DF162664D1B700C5224E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6DF152664D1B700C5224E /* AppDelegate.swift */; };
 		6FC6DF182664D1B700C5224E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6DF172664D1B700C5224E /* SceneDelegate.swift */; };
 		6FC6DF1A2664D1B700C5224E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6DF192664D1B700C5224E /* LoginViewController.swift */; };
@@ -22,6 +24,7 @@
 		6FC6DF1F2664D1BB00C5224E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FC6DF1E2664D1BB00C5224E /* Assets.xcassets */; };
 		6FC6DF222664D1BB00C5224E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC6DF202664D1BB00C5224E /* LaunchScreen.storyboard */; };
 		6FC6DF2A2664F75100C5224E /* StoryboardExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6DF292664F75100C5224E /* StoryboardExtention.swift */; };
+		6FD4377A2672946C00A36933 /* WeekAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD437792672946C00A36933 /* WeekAddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,8 @@
 		6F469CA326652FF000A17152 /* DaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysViewController.swift; sourceTree = "<group>"; };
 		6F469CA52665302900A17152 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		6F7E77E5266AAA8B0054F551 /* DataFromServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFromServer.swift; sourceTree = "<group>"; };
+		6FC6A53D2672BC9900E48054 /* DayAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAddViewController.swift; sourceTree = "<group>"; };
+		6FC6A53F2672C35600E48054 /* ExerciseAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseAddViewController.swift; sourceTree = "<group>"; };
 		6FC6DF122664D1B700C5224E /* Gym.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gym.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC6DF152664D1B700C5224E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FC6DF172664D1B700C5224E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +47,7 @@
 		6FC6DF212664D1BB00C5224E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FC6DF232664D1BB00C5224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FC6DF292664F75100C5224E /* StoryboardExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardExtention.swift; sourceTree = "<group>"; };
+		6FD437792672946C00A36933 /* WeekAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekAddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,9 @@
 				6F469CA126652FD000A17152 /* WeeksViewController.swift */,
 				6F469CA326652FF000A17152 /* DaysViewController.swift */,
 				6F469CA52665302900A17152 /* ExerciseViewController.swift */,
+				6FD437792672946C00A36933 /* WeekAddViewController.swift */,
+				6FC6A53D2672BC9900E48054 /* DayAddViewController.swift */,
+				6FC6A53F2672C35600E48054 /* ExerciseAddViewController.swift */,
 				6F7E77E5266AAA8B0054F551 /* DataFromServer.swift */,
 				6FC6DF1B2664D1B700C5224E /* Main.storyboard */,
 				6FC6DF1E2664D1BB00C5224E /* Assets.xcassets */,
@@ -172,10 +181,13 @@
 				6F7E77E6266AAA8B0054F551 /* DataFromServer.swift in Sources */,
 				6FC6DF182664D1B700C5224E /* SceneDelegate.swift in Sources */,
 				6FC6DF2A2664F75100C5224E /* StoryboardExtention.swift in Sources */,
+				6FC6A53E2672BC9900E48054 /* DayAddViewController.swift in Sources */,
 				6F469C99266504BE00A17152 /* RegistrationViewController.swift in Sources */,
 				6F469C9B26651D7800A17152 /* APIServer.swift in Sources */,
 				6F469CA226652FD000A17152 /* WeeksViewController.swift in Sources */,
 				6F469CA026652F9C00A17152 /* StageViewController.swift in Sources */,
+				6FC6A5402672C35600E48054 /* ExerciseAddViewController.swift in Sources */,
+				6FD4377A2672946C00A36933 /* WeekAddViewController.swift in Sources */,
 				6F469CA426652FF000A17152 /* DaysViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

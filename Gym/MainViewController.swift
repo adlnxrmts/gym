@@ -18,11 +18,13 @@ class MainViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let stageVC = segue.destination as! StageViewController
-        if segue.identifier == "upcomingSegue" {
-            stageVC.stageType = StageViewController.StageType.upcoming
-        } else if segue.identifier == "previousSegue" {
-            stageVC.stageType = StageViewController.StageType.previous
+        if segue.identifier == "previous-stages" || segue.identifier == "upcoming-stages" {
+            let stageVC = segue.destination as! StageViewController
+            if segue.identifier == "upcomingSegue" {
+                stageVC.stageType = StageViewController.StageType.upcoming
+            } else if segue.identifier == "previousSegue" {
+                stageVC.stageType = StageViewController.StageType.previous
+            }
         }
     }
 }

@@ -35,10 +35,41 @@ class LoginData: Codable {
     var lastname: String?
 }
 
+class AddingExercisesData: Codable {
+    var login: String
+    var exersises: [Int: exerciseData]
+    
+    init(exersises: [Int: exerciseData]) {
+        self.login = UserDefaults.standard.string(forKey: "userLogin")!
+        self.exersises = exersises
+    }
+}
+
+class AddingStageData: Codable {
+    var login: String
+    var name: String
+    var weeks: [Int: days]
+    
+    init(name: String, weeks: [Int: days]) {
+        self.login = UserDefaults.standard.string(forKey: "userLogin")!
+        self.name = name
+        self.weeks = weeks
+    }
+}
+
+struct days: Codable {
+    var days: [Int: exersises]
+}
+
+struct exersises: Codable {
+    var exercises: [Int: exerciseData]
+}
+
 struct exerciseData: Codable {
-    var id: Int
-    var number: Int
-    var description: String?                    //Here must be smth else don't forget to change
+    var name: String
+    var weight: Int
+    var reps: Int
+    var sets: Int
 }
 
 struct weeksAndDaysData: Codable {
