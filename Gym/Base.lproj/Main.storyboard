@@ -292,7 +292,7 @@
                                 <rect key="frame" x="141" y="460" width="132" height="30"/>
                                 <state key="normal" title="Новая тренировка"/>
                                 <connections>
-                                    <segue destination="u3c-5H-TPk" kind="show" id="UEM-f9-RLP"/>
+                                    <segue destination="u3c-5H-TPk" kind="show" identifier="add-exercise" id="UEM-f9-RLP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEn-xn-ql8">
@@ -623,7 +623,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HpO-yM-Gye">
-                                <rect key="frame" x="0.0" y="88" width="414" height="706"/>
+                                <rect key="frame" x="0.0" y="168" width="414" height="634"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="week-editor" rowHeight="80" id="ryi-P7-w1D" customClass="WeekTableViewCell" customModule="Gym" customModuleProvider="target">
@@ -686,6 +686,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgi-a7-gXa">
                                         <rect key="frame" x="168.5" y="22" width="77" height="30"/>
                                         <state key="normal" title="Сохранить"/>
+                                        <connections>
+                                            <action selector="saveButtonClicked:" destination="9qB-CV-AeN" eventType="touchUpInside" id="LhF-kZ-vcl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -694,13 +697,39 @@
                                     <constraint firstItem="fgi-a7-gXa" firstAttribute="centerX" secondItem="nGi-n8-zcw" secondAttribute="centerX" id="klp-eR-fc0"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Noc-vI-gEw">
+                                <rect key="frame" x="0.0" y="88" width="414" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Название этапа" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdx-k6-kRx">
+                                        <rect key="frame" x="24" y="8" width="127" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите название этапа" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kca-nA-Gxv">
+                                        <rect key="frame" x="24" y="37" width="349" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="J56-9k-fzC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="XF2-92-wCD" firstAttribute="trailing" secondItem="Noc-vI-gEw" secondAttribute="trailing" id="039-QJ-KnB"/>
                             <constraint firstItem="HpO-yM-Gye" firstAttribute="centerX" secondItem="XF2-92-wCD" secondAttribute="centerX" id="DHx-75-29x"/>
-                            <constraint firstItem="HpO-yM-Gye" firstAttribute="top" secondItem="XF2-92-wCD" secondAttribute="top" id="JKa-Bw-MpO"/>
+                            <constraint firstItem="Noc-vI-gEw" firstAttribute="top" secondItem="XF2-92-wCD" secondAttribute="top" id="GqX-k7-wOk"/>
+                            <constraint firstItem="Noc-vI-gEw" firstAttribute="centerX" secondItem="XF2-92-wCD" secondAttribute="centerX" id="IVI-ew-3CU"/>
                             <constraint firstItem="HpO-yM-Gye" firstAttribute="leading" secondItem="XF2-92-wCD" secondAttribute="leading" id="P8F-Zu-O5c"/>
-                            <constraint firstItem="nGi-n8-zcw" firstAttribute="top" secondItem="HpO-yM-Gye" secondAttribute="bottom" constant="8" id="SNe-nt-VIc"/>
+                            <constraint firstItem="nGi-n8-zcw" firstAttribute="top" secondItem="HpO-yM-Gye" secondAttribute="bottom" id="SNe-nt-VIc"/>
+                            <constraint firstItem="Noc-vI-gEw" firstAttribute="leading" secondItem="XF2-92-wCD" secondAttribute="leading" id="cyq-SG-fmG"/>
+                            <constraint firstItem="HpO-yM-Gye" firstAttribute="top" secondItem="Noc-vI-gEw" secondAttribute="bottom" id="f3l-do-PZq"/>
                             <constraint firstItem="XF2-92-wCD" firstAttribute="trailing" secondItem="HpO-yM-Gye" secondAttribute="trailing" id="m0W-PD-JPm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XF2-92-wCD"/>
@@ -708,6 +737,9 @@
                     <navigationItem key="navigationItem" id="I83-0q-m07">
                         <barButtonItem key="backBarButtonItem" title="Недели" id="big-6F-aVy"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="stageNameTextField" destination="Kca-nA-Gxv" id="vUb-hT-qG2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZQ-1T-gLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -806,7 +838,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="boq-Lv-Ik6">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="exercise-editor" rowHeight="180" id="Pz0-di-GU4" customClass="ExerciseTableViewCell" customModule="Gym" customModuleProvider="target">
@@ -955,19 +987,39 @@
                                     <outlet property="delegate" destination="u3c-5H-TPk" id="Ed6-CQ-g6O"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZb-HX-w05">
+                                <rect key="frame" x="0.0" y="802" width="414" height="94"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="94" id="eFy-2p-Eko"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkn-NR-lqo">
+                                <rect key="frame" x="169" y="834" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Сохранить"/>
+                                <connections>
+                                    <action selector="saveButtonClicked:" destination="u3c-5H-TPk" eventType="touchUpInside" id="sB4-dZ-aFD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="boq-Lv-Ik6" firstAttribute="bottom" secondItem="j53-PU-fS5" secondAttribute="bottom" constant="34" id="1Lx-Qg-Kbg"/>
+                            <constraint firstItem="MZb-HX-w05" firstAttribute="leading" secondItem="j53-PU-fS5" secondAttribute="leading" id="1Hg-Nb-nXZ"/>
                             <constraint firstItem="boq-Lv-Ik6" firstAttribute="top" secondItem="j53-PU-fS5" secondAttribute="top" id="484-hl-gol"/>
                             <constraint firstItem="boq-Lv-Ik6" firstAttribute="leading" secondItem="j53-PU-fS5" secondAttribute="leading" id="8M4-Z6-qih"/>
+                            <constraint firstItem="MZb-HX-w05" firstAttribute="centerX" secondItem="j53-PU-fS5" secondAttribute="centerX" id="8XV-WZ-FWe"/>
+                            <constraint firstItem="MZb-HX-w05" firstAttribute="top" secondItem="boq-Lv-Ik6" secondAttribute="bottom" id="I4x-Ra-Ofq"/>
                             <constraint firstItem="boq-Lv-Ik6" firstAttribute="centerX" secondItem="j53-PU-fS5" secondAttribute="centerX" id="aY7-fe-yvT"/>
                             <constraint firstItem="j53-PU-fS5" firstAttribute="trailing" secondItem="boq-Lv-Ik6" secondAttribute="trailing" id="bim-LQ-TyQ"/>
+                            <constraint firstItem="j53-PU-fS5" firstAttribute="trailing" secondItem="MZb-HX-w05" secondAttribute="trailing" id="g3C-Jl-MPf"/>
+                            <constraint firstItem="MZb-HX-w05" firstAttribute="bottom" secondItem="j53-PU-fS5" secondAttribute="bottom" constant="34" id="wfr-vk-FAU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j53-PU-fS5"/>
                     </view>
                     <navigationItem key="navigationItem" id="RW1-oM-o5T"/>
                     <connections>
+                        <outlet property="saveButton" destination="dkn-NR-lqo" id="h0L-Gq-20W"/>
                         <outlet property="tableView" destination="boq-Lv-Ik6" id="Xl1-7a-atF"/>
                     </connections>
                 </viewController>
@@ -977,7 +1029,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0Af-GT-7rN"/>
+        <segue reference="UEM-f9-RLP"/>
         <segue reference="tnl-Eu-0vt"/>
     </inferredMetricsTieBreakers>
 </document>

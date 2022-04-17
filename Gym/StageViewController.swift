@@ -34,6 +34,7 @@ class StageViewController: UIViewController {
             APIServer.previousStages(withUserName: userName, completionHandler: getData(data:response:error:))
             break
         default:
+            print("im here")
             break
         }
     }

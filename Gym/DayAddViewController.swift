@@ -10,7 +10,7 @@ import UIKit
 
 class DayAddViewController: UIViewController, UITextFieldDelegate {
     
-    var newDays: [Int: exersises?] = [:]
+    var newDays: [Int: exersises] = [:]
     var visibleDays = [0]
     var weekNumber: Int?
 
@@ -21,13 +21,16 @@ class DayAddViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let dayNumber = Int(textField.text!) else { return }
-        newDays[dayNumber] = nil
+        if newDays[dayNumber] == nil {
+            newDays[dayNumber] = exersises(exercises: [:])
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "day-to-exercise" {
             guard let destination = segue.destination as? ExerciseAddViewController, let cell = sender as? DayTableViewCell else { return }
             destination.dayNumber = Int(cell.dayNumberTextField.text!)
+//            destination.saveButton.isEnabled = false
         }
     }
     
@@ -46,7 +49,6 @@ extension DayAddViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "day-editor", for: indexPath) as! DayTableViewCell
             cell.dayNumberTextField.tag = indexPath.row
             cell.dayNumberTextField.delegate = self
-//            cell.dayNumberTextField.text = newDays[indexPath.row]
             return cell
         }
     }
@@ -55,6 +57,14 @@ extension DayAddViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row > visibleDays.count - 1 {
             self.visibleDays.append(visibleDays.count)
             tableView.reloadData()
+        }
+    }
+}
+
+extension DayAddViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let vc = viewController as? WeekAddViewController, let weekNum = weekNumber {
+            vc.newWeeks.weeks[weekNum]?.days = newDays
         }
     }
 }

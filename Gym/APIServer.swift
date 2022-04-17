@@ -11,7 +11,7 @@ import Foundation
 class APIServer {
     
     //DON'T FORGET TO PUT WORKING NGROK LINK
-    static let url = "http://1718ec9b889f.ngrok.io"
+    static let url = "http://d39054639185.ngrok.io"
     
     static func performPostRequest(withURL url: URL, body: Data, completionHandler: @escaping (Data?, URLResponse?, Error?)-> Void) {
         var request = URLRequest(url: url)
@@ -113,5 +113,13 @@ class APIServer {
         guard let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
         
         APIServer.performPostRequest(withURL: url, body: httpBody, completionHandler: completionHandler)
+    }
+    
+    static func saveStage(data: AddingStageData, complitionHandler: @escaping (Data?, URLResponse?, Error?)-> Void) {
+        guard let url = URL(string: url + "/create_stage") else { return }
+        
+        guard let httpBody = try? JSONEncoder().encode(data) else { return }
+        
+        APIServer.performPostRequest(withURL: url, body: httpBody, completionHandler: complitionHandler)
     }
 }

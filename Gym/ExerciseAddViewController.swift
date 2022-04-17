@@ -11,11 +11,13 @@ import UIKit
 class ExerciseAddViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var saveButton: UIButton!
     var newExercises = AddingExercisesData(exersises: [0: exerciseData(name: "", weight: 0, reps: 0, sets: 0)])
     var dayNumber: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -31,6 +33,9 @@ class ExerciseAddViewController: UIViewController, UITextFieldDelegate {
         default:
             break
         }
+    }
+    
+    @IBAction func saveButtonClicked(_ sender: UIButton) {
     }
 }
 
@@ -62,6 +67,15 @@ extension ExerciseAddViewController: UITableViewDelegate, UITableViewDataSource 
         if indexPath.row > newExercises.exersises.count - 1 {
             self.newExercises.exersises[indexPath.row] = exerciseData(name: "", weight: 0, reps: 0, sets: 0)
             tableView.reloadData()
+        }
+    }
+}
+
+extension ExerciseAddViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let vc = viewController as? DayAddViewController, let dayNum = dayNumber {
+            vc.newDays[dayNum]?.exercises = newExercises.exersises
+            self.navigationController?.delegate = vc
         }
     }
 }

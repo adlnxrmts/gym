@@ -20,11 +20,14 @@ class MainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "previous-stages" || segue.identifier == "upcoming-stages" {
             let stageVC = segue.destination as! StageViewController
-            if segue.identifier == "upcomingSegue" {
+            if segue.identifier == "upcoming-stages" {
                 stageVC.stageType = StageViewController.StageType.upcoming
-            } else if segue.identifier == "previousSegue" {
+            } else if segue.identifier == "previous-stages" {
                 stageVC.stageType = StageViewController.StageType.previous
             }
+        } else if segue.identifier == "add-exercise" {
+            let exerciseVC = segue.destination as! ExerciseAddViewController
+//            exerciseVC.saveButton.isEnabled = true
         }
     }
 }
