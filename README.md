@@ -19,9 +19,11 @@
 
 
 ## Screenshots
-<img src="./screenshots/auth.png" width="200"><img src="./screenshots/main.png" width="200">
-<img src="./screenshots/add-stage.png" width="200"><img src="./screenshots/add-week.png" width="200"><img src="./screenshots/add-exer.png" width="200">
-<img src="./screenshots/stage.png" width="200"><img src="./screenshots/week.png" width="200">
+<img src="./screenshots/auth.png" width="200"> <img src="./screenshots/main.png" width="200">
+
+<img src="./screenshots/add-stage.png" width="200"> <img src="./screenshots/add-week.png" width="200"> <img src="./screenshots/add-exer.png" width="200">
+
+<img src="./screenshots/stage.png" width="200"> <img src="./screenshots/week.png" width="200">
 
 
 ## Project Status
