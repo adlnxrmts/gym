@@ -19,7 +19,13 @@
 
 
 ## Screenshots
-
+![Example screenshot](./screenshots/auth.png)
+![Example screenshot](./screenshots/main.png)
+![Example screenshot](./screenshots/add-stage.png)
+![Example screenshot](./screenshots/add-week.png)
+![Example screenshot](./screenshots/add-day.png)
+![Example screenshot](./screenshots/stage.png)
+![Example screenshot](./screenshots/week.png)
 
 
 ## Project Status
