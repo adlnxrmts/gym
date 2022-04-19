@@ -19,13 +19,13 @@
 
 
 ## Screenshots
-![Example screenshot](./screenshots/auth.png)
-![Example screenshot](./screenshots/main.png)
-![Example screenshot](./screenshots/add-stage.png)
-![Example screenshot](./screenshots/add-week.png)
-![Example screenshot](./screenshots/add-day.png)
-![Example screenshot](./screenshots/stage.png)
-![Example screenshot](./screenshots/week.png)
+![Example screenshot](./screenshots/auth.png =100x)
+![Example screenshot](./screenshots/main.png =100x)
+![Example screenshot](./screenshots/add-stage.png =100x)
+![Example screenshot](./screenshots/add-week.png =100x)
+![Example screenshot](./screenshots/add-exer.png =100x)
+![Example screenshot](./screenshots/stage.png =100x)
+![Example screenshot](./screenshots/week.png =100x)
 
 
 ## Project Status
