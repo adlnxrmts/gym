@@ -31,4 +31,4 @@
 
 
 ## Contact
-
+Связаться со мной можно в телеграме: [@adlnxrmts](https://t.me/adlnxrmts)
